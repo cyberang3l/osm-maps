@@ -6,8 +6,9 @@ A collection of OpenStreetMap maps, for easy installation. You can use these map
 3. Edit the necessary paths and database connection settings.
 4. Choose if you want to generate a leaflet html file that you can copy
    to your web server and serve your tiles.
-5. Run the bash script install\_maps.sh
+5. Run the bash script `install\_maps.sh`
 6. Copy the generated renderd configuration lines in `renderd.conf` file.
+7. Restart renderd and apache webserver (`service renderd restart && service apache2 restart`)
 
 # Install an OpenStreetMap Tile Server
 
