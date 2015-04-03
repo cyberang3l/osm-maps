@@ -1,0 +1,9 @@
+build
+*.pyc
+*.xml
+leaflet
+map.html
+sample_renderd.conf
+configure.py
+configvars
+shp

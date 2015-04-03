@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# The folder name of the maps located under this directory to be installed.
+maps_to_install=(
+   osm-bright
+   osm-bright-contours
+)
+# The renderd names for each map. Eventually, the maps will be server by your tile server
+# at http://you.ip.address/renderd_map_name/{z}/{x}/{y}.png
+# The mapping is 1 to 1, so for example in the default configuration:
+#   osm-bright map will be accessible at 
+#     http://you.ip.address/bright/{z}/{x}/{y}.png
+#   osm-bright-contours map will be accessible at 
+#     http://you.ip.address/brightcont/{z}/{x}/{y}.png
+# and so on.
+renderd_map_names=(
+   bright
+   brightcont
+)
+
+# Mapnik XML installation path
+mapnik_xml_installation_path="./"
+
+# External IP or domain name where you will be accessing the server.
+host='localhost'
+
+# Valid values are:
+#    yes: the script will build a leaflet html file.
+#    no (or anything other than 'yes': the script will skip the generation of leaflet html file)
+build_leaflet_html='yes'
+
+# The absolute path to where your maps will be installed. 
+# If you want to use tilemill to edit your maps, use the default MapBox projects directory.
+# You should  not need to change this unless you have configured TileMill specially.
+# If you want to install 
+map_installation_path="~/Documents/MapBox/project"
+shp_folder_path="./shp"
+
+# PostGIS connection setup
+# Leave empty for Mapnik defaults. The only required parameter is dbname.
+postgis_host=""
+postgis_port=""
+postgis_dbname="gis"
+postgis_user=""
+postgis_password=""
