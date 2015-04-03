@@ -24,9 +24,6 @@ renderd_map_names=(
    osm
 )
 
-# Mapnik XML installation path
-mapnik_xml_installation_path="./"
-
 # External IP or domain name where you will be accessing the server.
 host='localhost'
 

@@ -18,7 +18,6 @@ fi
 # and use readlink to get the absolute path of the file/folder
 map_installation_path=$(eval readlink -f "${map_installation_path}")
 shp_folder_path=$(eval readlink -f "${shp_folder_path}")
-mapnik_xml_installation_path=$(eval readlink -f "${mapnik_xml_installation_path}")
 
 if [[ ! -w "${map_installation_path}" ]]; then
    echo "The Map installation directory '${map_installation_path}' does not exist, or the user does not have write access."
@@ -27,11 +26,6 @@ fi
 
 if [[ ! -w "${shp_folder_path}" ]]; then
    echo "The shapefiles directory '${shp_folder_path}' does not exist, or the user does not have write access."
-   exit 1
-fi
-
-if [[ ! -w "${mapnik_xml_installation_path}" ]]; then
-   echo "The Mapnik XML directory '${mapnik_xml_installation_path}' does not exist, or the user does not have write access."
    exit 1
 fi
 
@@ -83,7 +77,7 @@ for ((map=0; map<"${#maps_to_install[@]}"; map++)); do
    cd ..
    
    # Build the Mapnik XML file
-   echo "Building Mapnik XML file '${mapnik_xml_installation_path}/${renderd_map_names[$map]}.xml'."
+   echo "Building Mapnik XML file '${map_installed_at[$map]}/${renderd_map_names[$map]}.xml'."
    ${carto_bin} "${map_installed_at[$map]}/project.mml" > "${map_installed_at[$map]}/${renderd_map_names[$map]}.xml"
 done
 
