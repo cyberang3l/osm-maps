@@ -91,7 +91,7 @@ download_world_boundaries()
 }
 
 
-if [[ ! -d "shp" ]]; then
+if [[ ! -d "$shp_dir" ]]; then
    # If the shapefiles directory does not exist, then download the shapefiles
    mkdir "$shp_dir"
    download_land_polygons
@@ -105,47 +105,47 @@ else
    # If it is correct, then index the shapefiles. Otherwise, remove the directory and redownload
    # the corresponding shapefile.
 
-   md5=$(md5sum shp/land-polygons-split-3857/land_polygons.shp | awk '{print $1}')
+   md5=$(md5sum "$shp_dir/land-polygons-split-3857/land_polygons.shp" | awk '{print $1}')
    if [[ "$md5" == "0c971c09ad145a7df932669af7cabb3f" ]]; then
 	echo "'land-polygons-split-3857' exists. Indexing..."
-	shapeindex shp/land-polygons-split-3857/land_polygons.shp
+	shapeindex "$shp_dir/land-polygons-split-3857/land_polygons.shp"
    else
 	download_land_polygons
    fi
 
-   md5=$(md5sum shp/simplified-land-polygons-complete-3857/simplified_land_polygons.shp | awk '{print $1}')
+   md5=$(md5sum "$shp_dir/simplified-land-polygons-complete-3857/simplified_land_polygons.shp" | awk '{print $1}')
    if [[ "$md5" == "502ff9abee21cd954f5054b2ab531691" ]]; then
 	echo "'simplified-land-polygons-complete-3857' exists. Indexing..."
-	shapeindex shp/simplified-land-polygons-complete-3857/simplified_land_polygons.shp
+	shapeindex "$shp_dir/simplified-land-polygons-complete-3857/simplified_land_polygons.shp"
    else
 	download_simplified_land_polygons
    fi
 
-   md5=$(md5sum shp/ne_10m_populated_places_simple/ne_10m_populated_places_simple.shp | awk '{print $1}')
+   md5=$(md5sum "$shp_dir/ne_10m_populated_places_simple/ne_10m_populated_places_simple.shp" | awk '{print $1}')
    if [[ "$md5" == "07a7e703065d0be1de3ba98c658d5b95" ]]; then
 	echo "'ne_10m_populated_places_simple' exists. Indexing..."
-	shapeindex shp/ne_10m_populated_places_simple/ne_10m_populated_places_simple.shp
+	shapeindex "$shp_dir/ne_10m_populated_places_simple/ne_10m_populated_places_simple.shp"
    else
 	download_ne_10m_populated_places_simple
    fi
    
-   md5=$(md5sum shp/ne_10m_populated_places/ne_10m_populated_places.shp | awk '{print $1}')
+   md5=$(md5sum "$shp_dir/ne_10m_populated_places/ne_10m_populated_places.shp" | awk '{print $1}')
    if [[ "$md5" == "af49081e9d6567d8ae83367c6a8ee67d" ]]; then
 	echo "'ne_10m_populated_places' exists. Indexing..."
-	shapeindex shp/ne_10m_populated_places/ne_10m_populated_places.shp
+	shapeindex "$shp_dir/ne_10m_populated_places/ne_10m_populated_places.shp"
    else
 	download_ne_10m_populated_places
    fi
    
-   md5=$(md5sum shp/ne_110m_admin_0_boundary_lines_land/ne_110m_admin_0_boundary_lines_land.shp | awk '{print $1}')
+   md5=$(md5sum "$shp_dir/ne_110m_admin_0_boundary_lines_land/ne_110m_admin_0_boundary_lines_land.shp" | awk '{print $1}')
    if [[ "$md5" == "269f37ff349926c8e53ed5913e1dbeaa" ]]; then
 	echo "'ne_110m_admin_0_boundary_lines_land' exists. Indexing..."
-	shapeindex shp/ne_110m_admin_0_boundary_lines_land/ne_110m_admin_0_boundary_lines_land.shp
+	shapeindex "$shp_dir/ne_110m_admin_0_boundary_lines_land/ne_110m_admin_0_boundary_lines_land.shp"
    else
 	download_ne_110m_admin_0_boundary_lines_land
    fi
    
-   md5=$(md5sum shp/world_boundaries/world_boundaries_m.shp | awk '{print $1}')
+   md5=$(md5sum "$shp_dir/world_boundaries/world_boundaries_m.shp" | awk '{print $1}')
    if [[ "$md5" == "a90324620154c06821d1b32848825926" ]]; then
 	echo "'world_boundaries' exists."
 	# world_boundaries are already indexed, so we do not need to run shapeindex
