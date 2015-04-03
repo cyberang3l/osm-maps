@@ -12,7 +12,6 @@ if [[ ! -f "${carto_bin}" ]]; then
    echo "In Debian/Ubuntu, you can install it with the command 'sudo apt-get install node-carto'"
 fi
 
-
 . configvars
 
 # Use eval to expand tilde to home directories, or anything else that needs to be expanded,
@@ -50,13 +49,25 @@ bash download_shapes.sh
 for ((map=0; map<"${#maps_to_install[@]}"; map++)); do
    echo ""
    echo "Processing map ${maps_to_install[$map]}"..
+   
    cd "${maps_to_install[$map]}"
    cp configure.py.sample configure.py
    map_name[$map]=$(cat configure.py | grep 'config\[\"name\"\]' | cut -d\" -f 4)
    sed -i 's|config\["path"\].*|config["path"] = "'${map_installation_path}'"|' configure.py
+   
+   # Needed by the OSM-Bright based maps
    sed -i 's|config\["land-high"\].*|config["land-high"] = "'${shp_folder_path}'/land-polygons-split-3857/land_polygons.shp"|' configure.py
    sed -i 's|config\["land-low"\].*|config["land-low"] = "'${shp_folder_path}'/simplified-land-polygons-complete-3857/simplified_land_polygons.shp"|' configure.py
    sed -i 's|config\["ne_places"\].*|config["ne_places"] = "'${shp_folder_path}'/ne_10m_populated_places_simple/ne_10m_populated_places_simple.shp"|' configure.py
+   
+   # Needed by the openstreetmap-cart
+   sed -i 's|config\["world"\].*|config["world"] = "'${shp_folder_path}'/simplified-land-polygons-complete-3857/simplified_land_polygons.shp"|' configure.py
+   sed -i 's|config\["coast-poly"\].*|config["coast-poly"] = "'${shp_folder_path}'/land-polygons-split-3857/land_polygons.shp"|' configure.py
+   sed -i 's|config\["builtup"\].*|config["builtup"] = "'${shp_folder_path}'/world_boundaries/builtup_area.shp"|' configure.py
+   sed -i 's|config\["necountries"\].*|config["necountries"] = "'${shp_folder_path}'/ne_110m_admin_0_boundary_lines_land/ne_110m_admin_0_boundary_lines_land.shp"|' configure.py
+   sed -i 's|config\["nepopulated"\].*|config["nepopulated"] = "'${shp_folder_path}'/ne_10m_populated_places/ne_10m_populated_places.shp"|' configure.py
+   
+   # Database configuration
    sed -i 's|config\["postgis"\]\["host"\].*|config["postgis"]["host"]     = "'${postgis_host}'"|' configure.py
    sed -i 's|config\["postgis"\]\["port"\].*|config["postgis"]["port"]     = "'${postgis_port}'"|' configure.py
    sed -i 's|config\["postgis"\]\["dbname"\].*|config["postgis"]["dbname"]   = "'${postgis_dbname}'"|' configure.py
@@ -64,10 +75,14 @@ for ((map=0; map<"${#maps_to_install[@]}"; map++)); do
    # If your password contains the character "|", then change the following sed command to something like this:
    # sed -i 's/config\["postgis"\]\["password"\].*/config["postgis"]["password"] = "'$postgis_password'"/' configure.py
    sed -i 's|config\["postgis"\]\["password"\].*|config["postgis"]["password"] = "'${postgis_password}'"|' configure.py
+   
+   # Install the map
    map_installed_at[$map]=$(./make.py | awk '{print $3}')
    echo "Map installed at '${map_installed_at[$map]}'"
    rm -rf *.pyc build configure.py
    cd ..
+   
+   # Build the Mapnik XML file
    echo "Building Mapnik XML file '${mapnik_xml_installation_path}/${renderd_map_names[$map]}.xml'."
    ${carto_bin} "${map_installed_at[$map]}/project.mml" > "${mapnik_xml_installation_path}/${renderd_map_names[$map]}.xml"
 done
