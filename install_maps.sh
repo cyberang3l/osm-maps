@@ -84,7 +84,7 @@ for ((map=0; map<"${#maps_to_install[@]}"; map++)); do
    
    # Build the Mapnik XML file
    echo "Building Mapnik XML file '${mapnik_xml_installation_path}/${renderd_map_names[$map]}.xml'."
-   ${carto_bin} "${map_installed_at[$map]}/project.mml" > "${mapnik_xml_installation_path}/${renderd_map_names[$map]}.xml"
+   ${carto_bin} "${map_installed_at[$map]}/project.mml" > "${map_installed_at[$map]}/${renderd_map_names[$map]}.xml"
 done
 
 rm sample_renderd.conf
@@ -98,7 +98,7 @@ for ((i=0; i<${#maps_to_install[@]}; i++)); do
 [${renderd_map_names[$i]}]
 URI=/${renderd_map_names[$i]}/
 TILEDIR=/var/lib/mod_tile
-XML=${mapnik_xml_installation_path}/${renderd_map_names[$i]}.xml
+XML=${map_installed_at[$i]}/${renderd_map_names[$i]}.xml
 HOST=localhost
 TILESIZE=256
 MINZOOM=0
