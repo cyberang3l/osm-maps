@@ -1,3 +1,10 @@
+OSM Bright Contours
+==========
+
+This map is based on OSM Bright, but I have added soft contour lines and elevation labels.
+The rest of this readme is the one from OSM Bright.
+
+
 OSM Bright
 ==========
 

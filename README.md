@@ -1,6 +1,15 @@
 # OSM Maps Collection
 A collection of OpenStreetMap maps, for easy installation. You can use these maps either with a TileServer, or load them on TileMill and edit them.
 
+The main script (`install\_maps.sh`) will configure the maps, and generate a Mapnik XML file for each one of them, a sample *renderd.conf* and an optional leaflet based
+html file that you can add in your web server to browse your maps.
+
+Each map is located under its own folder, with the original README.md file from the source where I downloaded the map.
+The only map I created, is the map *osm-bright-contours*, that is a vanilla OSM-Bright map, with contour lines and elevation labels added.
+
+The following steps will build all the maps properly and install them in one go, and the default settings will install the maps
+under ~/Documents/Mapbox/projects, so that you can instantly use them with TileMill.
+
 1. Install an OpenStreetMap Tile Server (look at the second/third sections of this readme file for more information).
 2. Copy the file `configvars.sample` to a file name `configvars`
 3. Edit the necessary paths and database connection settings.
