@@ -5,6 +5,7 @@ maps_to_install=(
    osm-bright
    osm-bright-contours
    pandonia
+   blossom
 )
 # The renderd names for each map. Eventually, the maps will be server by your tile server
 # at http://you.ip.address/renderd_map_name/{z}/{x}/{y}.png
@@ -18,6 +19,7 @@ renderd_map_names=(
    bright
    brightcont
    pandonia
+   blossom
 )
 
 # Mapnik XML installation path

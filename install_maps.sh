@@ -195,7 +195,7 @@ EOF
 EOF
 
    for ((map=0; map<"${#maps_to_install[@]}"; map++)); do
-	echo "         \"${map_name[$map]}\": map${map}," >> map.html
+	echo "         \"Local: ${map_name[$map]}\": map${map}," >> map.html
    done
 
    cat << EOF >> map.html
