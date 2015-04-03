@@ -1,10 +1,16 @@
 #!/bin/bash
 
+shp_dir="$1"
+
+if [[ ! -d "$shp_dir"  ]]; then
+   mkdir -p "$shp_dir"
+fi
+
 download_land_polygons()
 {
    echo "Downloading land_polygons..."
    echo ""
-   cd shp
+   cd "$shp_dir"
    rm -rf land-polygons-split-3857
    wget http://data.openstreetmapdata.com/land-polygons-split-3857.zip
    unzip land-polygons-split-3857.zip
@@ -17,7 +23,7 @@ download_simplified_land_polygons()
 {
    echo "Downloading simplified_land_polygons..."
    echo ""
-   cd shp
+   cd "$shp_dir"
    rm -rf simplified-land-polygons-complete-3857
    wget http://data.openstreetmapdata.com/simplified-land-polygons-complete-3857.zip
    unzip simplified-land-polygons-complete-3857.zip
@@ -30,7 +36,7 @@ download_ne_10m_populated_places_simple()
 {
    echo "Downloading ne_10m_populated_places..."
    echo ""
-   cd shp
+   cd "$shp_dir"
    rm -rf ne_10m_populated_places_simple
    mkdir ne_10m_populated_places_simple
    cd ne_10m_populated_places_simple
@@ -45,7 +51,7 @@ download_ne_10m_populated_places()
 {
    echo "Downloading ne_10m_populated_places..."
    echo ""
-   cd shp
+   cd "$shp_dir"
    rm -rf ne_10m_populated_places
    mkdir ne_10m_populated_places
    cd ne_10m_populated_places
@@ -60,7 +66,7 @@ download_ne_110m_admin_0_boundary_lines_land()
 {
    echo "Downloading ne_110m_admin_0_boundary_lines_land..."
    echo ""
-   cd shp
+   cd "$shp_dir"
    rm -rf ne_110m_admin_0_boundary_lines_land
    mkdir ne_110m_admin_0_boundary_lines_land
    cd ne_110m_admin_0_boundary_lines_land
@@ -75,20 +81,19 @@ download_world_boundaries()
 {
    echo "Downloading world_boundaries..."
    echo ""
-   cd shp
+   cd "$shp_dir"
    rm -rf world_boundaries
    wget http://planet.openstreetmap.org/historical-shapefiles/world_boundaries-spherical.tgz
    tar xvf world_boundaries-spherical.tgz
    rm world_boundaries-spherical.tgz
    # world_boundaries are already indexed, so we do not need to run shapeindex
    cd ..
-   http://planet.openstreetmap.org/historical-shapefiles/world_boundaries-spherical.tgz
 }
 
 
 if [[ ! -d "shp" ]]; then
    # If the shapefiles directory does not exist, then download the shapefiles
-   mkdir shp
+   mkdir "$shp_dir"
    download_land_polygons
    download_simplified_land_polygons
    download_ne_10m_populated_places_simple
@@ -142,7 +147,7 @@ else
    
    md5=$(md5sum shp/world_boundaries/world_boundaries_m.shp | awk '{print $1}')
    if [[ "$md5" == "a90324620154c06821d1b32848825926" ]]; then
-	echo "'world_boundaries' exists. Indexing..."
+	echo "'world_boundaries' exists."
 	# world_boundaries are already indexed, so we do not need to run shapeindex
    else
 	download_world_boundaries

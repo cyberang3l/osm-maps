@@ -44,7 +44,7 @@ map_installed_at=()
 map_name=()
 
 # First download the shapefiles needed by the maps
-bash download_shapes.sh
+bash download_shapes.sh "$shp_folder_path"
 
 for ((map=0; map<"${#maps_to_install[@]}"; map++)); do
    echo ""

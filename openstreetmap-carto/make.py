@@ -21,7 +21,6 @@ from configure import config
 from lib.utils import copy_tree
 
 config["path"] = expanduser(config["path"])
-print config["path"]
 
 def clean():
   if isdir("build"):
