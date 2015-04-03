@@ -45,7 +45,7 @@ map_installed_at=()
 map_name=()
 
 # First download the shapefiles needed by the maps
-#bash download_shapes.sh
+bash download_shapes.sh
 
 for ((map=0; map<"${#maps_to_install[@]}"; map++)); do
    echo ""
@@ -88,6 +88,7 @@ HOST=localhost
 TILESIZE=256
 MINZOOM=0
 MAXZOOM=18
+
 EOF
 
 done
@@ -141,7 +142,7 @@ if [[ "${build_leaflet_html}" == "yes" ]]; then
 EOF
 
    for ((map=0; map<"${#maps_to_install[@]}"; map++)); do
-	echo "   var map$map = new L.TileLayer('http://${host}/${renderd_map_names[$i]}/{z}/{x}/{y}.png', {" >> map.html
+	echo "   var map$map = new L.TileLayer('http://${host}/${renderd_map_names[$map]}/{z}/{x}/{y}.png', {" >> map.html
 	echo "                     maxZoom: 18, attribution: 'Locally Served Tiles'});" >> map.html
 	echo "" >> map.html
    done
