@@ -4,6 +4,7 @@
 maps_to_install=(
    osm-bright
    osm-bright-contours
+   osm-bright-hybrid
    pandonia
    blossom
    openstreetmap-carto
@@ -19,6 +20,7 @@ maps_to_install=(
 renderd_map_names=(
    bright
    brightcont
+   brighthyb
    pandonia
    blossom
    osm
