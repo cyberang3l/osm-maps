@@ -38,4 +38,4 @@ At this point you should test that you have a working tile server, that is able 
      way         contour_ext             text    linear
      way         ele                     text    linear
      ```
-3. Append the SRTM data into the database with the command `osm2pgsql --append --slim -c 18000 -d gis --number-processes 8 <srtm-data.pbf>`
+3. Append the SRTM data into the database with the command `osm2pgsql --append --slim -C 18000 -d gis --number-processes 8 <srtm-data.pbf>`
