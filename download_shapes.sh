@@ -83,7 +83,7 @@ download_world_boundaries()
    echo ""
    cd "$shp_dir"
    rm -rf world_boundaries
-   wget http://planet.openstreetmap.org/historical-shapefiles/world_boundaries-spherical.tgz
+   wget https://planet.openstreetmap.org/historical-shapefiles/world_boundaries-spherical.tgz
    tar xvf world_boundaries-spherical.tgz
    rm world_boundaries-spherical.tgz
    # world_boundaries are already indexed, so we do not need to run shapeindex
