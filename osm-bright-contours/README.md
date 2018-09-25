@@ -8,7 +8,7 @@ The rest of this readme is the one from OSM Bright.
 OSM Bright
 ==========
 
-![screenshot](https://raw.github.com/cyberang3l/osm-bright-contours/master/preview.png)
+![screenshot](preview.png)
 
 OSM Bright is a sensible starting point for quickly making beautiful maps based
 on an OpenStreetMap database. It is written in the [Carto][] styling language
